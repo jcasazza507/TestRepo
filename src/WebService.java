@@ -1,9 +1,15 @@
 import java.io.IOException;
 import java.io.InputStream;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-
 import org.apache.commons.io.IOUtils;
+//import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class WebService {
 	
 	private FTPClientHandler ftpCH;
@@ -38,7 +44,7 @@ public class WebService {
 		return replyCode;
 	}
 	
-	@POST
+	@GET
 	public FileResult getFile(String filename, String server, int port, String username, String password)
 	{ 
 		FileResult fr = new FileResult(filename, null);
