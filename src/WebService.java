@@ -12,16 +12,10 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 public class WebService {
 	
-	private FTPClientHandler ftpCH;
-	
-	public WebService() 
-	{ 
-		ftpCH = new FTPClientHandler();
-	}
-	
 	@POST
 	public int putFile(String filename, String fileContents, String server, int port, String username, String password)
 	{ 
+		FTPClientHandler ftpCH = new FTPClientHandler();
 		int replyCode;
 		if(ftpCH.CONNECT(server, port, username, password)) {
 			//System.out.println("Connecting worked!!");
@@ -47,6 +41,7 @@ public class WebService {
 	@GET
 	public FileResult getFile(String filename, String server, int port, String username, String password)
 	{ 
+		FTPClientHandler ftpCH = new FTPClientHandler();
 		FileResult fr = new FileResult(filename, null);
 		try {
 			if(ftpCH.CONNECT(server, port, username, password)) {
