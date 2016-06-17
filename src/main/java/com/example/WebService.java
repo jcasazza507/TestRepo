@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 public class WebService {
 	
 	@POST
+	@Path("putFile")
 	public int putFile(String filename, String fileContents, String server, int port, String username, String password)
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();
@@ -40,6 +41,7 @@ public class WebService {
 	}
 	
 	@GET
+	@Path("getFile")
 	public FileResult getFile(String filename, String server, int port, String username, String password)
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();

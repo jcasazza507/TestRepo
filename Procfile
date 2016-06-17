@@ -1,1 +1,1 @@
-web: java -cp target/classes:target/dependency/* com.example.heroku.Main OPTIONS=server,jsp
+web: java -cp target/classes:target/dependency/* com.example.heroku.Main
