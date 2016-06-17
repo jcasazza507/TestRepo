@@ -1,3 +1,4 @@
+package com;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.ws.rs.Consumes;
@@ -5,17 +6,18 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import org.apache.commons.io.IOUtils;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
-@Path("webservice")
+@Path("web service")
 public class WebService {
 	
 	@POST
 	@Path("putFile")
-	public int putFile(String filename, String fileContents, String server, int port, String username, String password)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.TEXT_PLAIN) //Maybe not?? I just don't think an int primitive will work with JSON
+	public int putFile(String filename, String filecontents, String server, int port, String username, String password)
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();
 		int replyCode;
@@ -23,7 +25,7 @@ public class WebService {
 			//System.out.println("Connecting worked!!");
 			replyCode = ftpCH.getFTP().getReplyCode();
 			try {
-				InputStream is = IOUtils.toInputStream(fileContents, "UTF-8");
+				InputStream is = IOUtils.toInputStream(filecontents, "UTF-8");
 				ftpCH.getFTP().enterLocalPassiveMode();
 				ftpCH.getFTP().storeFile(filename, is);
 				replyCode = ftpCH.getFTP().getReplyCode();
@@ -41,8 +43,9 @@ public class WebService {
 	}
 	
 	@GET
-	@Path("getFile")
-	public FileResult getFile(String filename, String server, int port, String username, String password)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("getFile/{filename}/{server}/{port}/{username}/{password}")
+	public FileResult getFile(@PathParam("{filename}") String filename, @PathParam("{server}") String server, @PathParam("{port}") int port, @PathParam("{username}") String username, @PathParam("{password}") String password)
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();
 		FileResult fr = new FileResult(filename, null);
