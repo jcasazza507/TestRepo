@@ -1,1 +1,1 @@
-web:    java -cp target/classes:target/dependency/* com.WebService
+web:    java -cp target/classes:target/dependency/* com.WebService pdf
