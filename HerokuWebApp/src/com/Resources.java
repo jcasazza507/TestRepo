@@ -23,12 +23,12 @@ public class Resources {
 		FTPResponse response;
 		if(ftpCH.CONNECT(upload.getServer(), upload.getPort(), upload.getUsername(), upload.getPassword())) {
 			//System.out.println("Connecting worked!!");
-			response.setCode() = ftpCH.getFTP().getReplyCode();
+			response.setCode(ftpCH.getFTP().getReplyCode());
 			try {
 				InputStream is = IOUtils.toInputStream(upload.getFilecontents(), "UTF-8");
 				ftpCH.getFTP().enterLocalPassiveMode();
 				ftpCH.getFTP().storeFile(upload.getFilename(), is);
-				response.setCode() = ftpCH.getFTP().getReplyCode();
+				response.setCode(ftpCH.getFTP().getReplyCode());
 				is.close();
 			}
 			catch(IOException ioe) {
@@ -36,7 +36,7 @@ public class Resources {
 			}
 		}
 		else {
-			response.setCode() = ftpCH.getFTP().getReplyCode();
+			response.setCode(ftpCH.getFTP().getReplyCode());
 		}
 		ftpCH.DISCONNECT();
 		return response;
