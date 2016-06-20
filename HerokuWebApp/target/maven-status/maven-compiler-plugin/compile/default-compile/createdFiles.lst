@@ -1,5 +1,7 @@
-com/WebService.class
 com/FileResult.class
 com/FTPClientHandler.class
-com/WebService$1.class
 com/Resources.class
+com/Upload.class
+com/WebService.class
+com/WebService$1.class
+com/FTPResponse.class
