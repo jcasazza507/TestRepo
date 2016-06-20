@@ -47,7 +47,7 @@ public class Resources {
 	@Path("getFile/{filename}/{server}/{port}/{username}/{password}")
 	public FileResult getFile(@PathParam("{filename}") String filename, @PathParam("{server}") String server, @PathParam("{port}") int port, @PathParam("{username}") String username, @PathParam("{password}") String password)
 	{ 
-		System.out.println("Server: " + server)
+		System.out.println("Server: " + server);
 		FTPClientHandler ftpCH = new FTPClientHandler();
 		FileResult fr = new FileResult(filename, null);
 		try {
