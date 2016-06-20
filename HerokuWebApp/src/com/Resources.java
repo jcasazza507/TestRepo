@@ -20,7 +20,12 @@ public class Resources {
 	public FTPResponse putFile(Upload upload)
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();
-		FTPResponse response;
+		FTPResponse response = null;
+		if (upload = null)
+		{
+			System.out.println("Passed improper arguments.")
+			return response;
+		}
 		if(ftpCH.CONNECT(upload.getServer(), upload.getPort(), upload.getUsername(), upload.getPassword())) {
 			//System.out.println("Connecting worked!!");
 			response.setCode(ftpCH.getFTP().getReplyCode());
