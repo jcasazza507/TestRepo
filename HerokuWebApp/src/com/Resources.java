@@ -32,7 +32,7 @@ public class Resources {
 				is.close();
 			}
 			catch(IOException ioe) {
-				System.out.println("An error occurred while uploading file " + filename + ".");
+				System.out.println("An error occurred while uploading file " + upload.getFilename() + ".");
 			}
 		}
 		else {
