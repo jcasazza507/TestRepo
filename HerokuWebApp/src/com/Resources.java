@@ -17,7 +17,7 @@ public class Resources {
 	@Path("putFile")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON) 
-	public FTPResponse putFile()
+	public FTPResponse putFile(Upload upload)
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();
 		FTPResponse response = new FTPResponse();
