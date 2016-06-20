@@ -18,7 +18,7 @@ public class WebService
 	public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException 
 	{
 		final int port = System.getenv("PORT") != null ? Integer.valueOf(System.getenv("PORT")) : 8080;
-System.out.println(“PORT: ” + port);
+		System.out.println("PORT: " + port);
 		final URI baseUri = UriBuilder.fromUri("http://0.0.0.0/").port(port).build(); //do i need to alter this for heroku?
         	final Application application = Application.builder(ResourceConfig.builder().packages(WebService.class.getPackage().getName()).build()).build();
         	application.addModules(new JsonJacksonModule());
