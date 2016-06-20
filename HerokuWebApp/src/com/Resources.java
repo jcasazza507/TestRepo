@@ -23,7 +23,7 @@ public class Resources {
 		FTPResponse response = null;
 		if (upload = null)
 		{
-			System.out.println("Passed improper arguments.")
+			System.out.println("Passed improper arguments.”);
 			return response;
 		}
 		if(ftpCH.CONNECT(upload.getServer(), upload.getPort(), upload.getUsername(), upload.getPassword())) {
