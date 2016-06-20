@@ -27,7 +27,7 @@ public class Resources {
 			try {
 				InputStream is = IOUtils.toInputStream(upload.getFilecontents(), "UTF-8");
 				ftpCH.getFTP().enterLocalPassiveMode();
-				ftpCH.getFTP().storeFile(filename, is);
+				ftpCH.getFTP().storeFile(upload.getFilename(), is);
 				response.setCode() = ftpCH.getFTP().getReplyCode();
 				is.close();
 			}
