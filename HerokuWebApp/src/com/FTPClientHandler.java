@@ -33,16 +33,16 @@ public class FTPClientHandler {
 			reply = this.ftp.getReplyCode();
 			
 			if (!FTPReply.isPositiveCompletion(reply)) {
-				System.out.println("FTP server refused connection.");
+				System.err.println("FTP server refused connection.");
 				return false;
 			}
 			else return true;
 		}
 		catch (java.net.ConnectException ce) {
-			System.out.println("Failed to connect to FTP server.");
+			System.err.println("Failed to connect to FTP server.");
 		}
 		catch (java.net.UnknownHostException uhe) {
-			System.out.println("Could not resolve server name.");
+			System.err.println("Could not resolve server name.");
 		}
 		catch (IOException e) {
 			e.printStackTrace();
@@ -58,14 +58,14 @@ public class FTPClientHandler {
 				System.out.println("Logout successful.");
 			}
 			catch(IOException ioeLO) {
-				System.out.println("An error occurred while logging out");
+				System.err.println("An error occurred while logging out");
 			}
 			System.out.println("Disconnecting...");
 			try {
 				this.ftp.disconnect();
 			}
 			catch (IOException ioeD) {
-				System.out.println("An error occured while disconnecting.");
+				System.err.println("An error occurred while disconnecting.");
 				return false;
 			}
 			System.out.println("Disconnect successful.");

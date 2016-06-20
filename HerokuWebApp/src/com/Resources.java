@@ -23,11 +23,10 @@ public class Resources {
 		FTPResponse response = new FTPResponse();
 		if (upload == null)
 		{
-			System.out.println("Passed improper arguments.");
+			System.err.println("Passed improper arguments.");
 			return response;
 		}
 		if(ftpCH.CONNECT(upload.getServer(), upload.getPort(), upload.getUsername(), upload.getPassword())) {
-			//System.out.println("Connecting worked!!");
 			response.setCode(ftpCH.getFTP().getReplyCode());
 			response.setMessage(ftpCH.getFTP().getReplyString());
 			try {
@@ -39,7 +38,7 @@ public class Resources {
 				is.close();
 			}
 			catch(IOException ioe) {
-				System.out.println("An error occurred while uploading file " + upload.getFilename() + ".");
+				System.err.println("An error occurred while uploading file " + upload.getFilename() + ".");
 			}
 		}
 		else {
@@ -55,7 +54,6 @@ public class Resources {
 	@Path("getFile/{filename}/{server}/{port}/{username}/{password}")
 	public FileResult getFile(@PathParam("filename") String filename, @PathParam("server") String server, @PathParam("port") int port, @PathParam("username") String username, @PathParam("password") String password)
 	{ 
-		System.out.println("Server: " + server);
 		FTPClientHandler ftpCH = new FTPClientHandler();
 		FileResult fr = new FileResult(filename, null);
 		try {
@@ -63,7 +61,7 @@ public class Resources {
 				ftpCH.getFTP().enterLocalPassiveMode();
 				InputStream is = ftpCH.getFTP().retrieveFileStream(filename);
 				if (is == null) {
-					System.out.println("File " + filename + " could not be found.");
+					System.err.println("File " + filename + " could not be found.");
 				}
 				else {
 					fr.setFilecontents(IOUtils.toString(is, "UTF-8"));
@@ -72,7 +70,7 @@ public class Resources {
 			}
 		}
 		catch(IOException ioe) {
-			System.out.println("An error occurred while retrieving file " + filename);
+			System.err.println("An error occurred while retrieving file " + filename);
 		}
 		ftpCH.DISCONNECT();
 		return fr;
