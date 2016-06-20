@@ -1,7 +1,7 @@
 package com;
 /**
  * 
- * @author evan
+ * @author evan marian
  * 
  * FileResult is a simple class that holds two pieces of data: a String containing the name of a file 
  * (filename) and a String containing the file's contents. 

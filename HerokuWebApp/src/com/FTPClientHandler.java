@@ -3,7 +3,7 @@ import java.io.IOException;
 import org.apache.commons.net.ftp.*;
 /**
  * 
- * @author evan
+ * @author evan marian
  *
  * FTPClientHandler creates an FTPClient and implements COONNECT()
  * and DISCONNECT() methods that handle connecting, logging in, 
