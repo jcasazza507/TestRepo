@@ -15,9 +15,9 @@ public class Resources {
 	
 	@POST
 	@Path("putFile")
-	@Produces(MediaType.PLAIN_TEXT)
+	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_JSON) //Maybe not?? I just don't think an int primitive will work with JSON
-	public int putFile(String filename, String filecontents, String server, int port, String username, String password)
+	public int putFile(String filename, String filecontents, String server, String port, String username, String password)
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();
 		int replyCode;
