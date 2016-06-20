@@ -1,4 +1,6 @@
 package com;
+
+import java.util.Base64;
 import java.io.IOException;
 import java.io.InputStream;
 import javax.ws.rs.Consumes;
@@ -16,25 +18,30 @@ public class Resources {
 	@POST
 	@Path("putFile")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON) 
+	@Consumes(MediaType.APPLICATION_JSON)
 	public FTPResponse putFile(Upload upload)
 	{ 
-		FTPClientHandler ftpCH = new FTPClientHandler();
+		FTPSClientHandler ftpsCH = new FTPSClientHandler();
 		FTPResponse response = new FTPResponse();
 		if (upload == null)
 		{
 			System.err.println("Passed improper arguments.");
 			return response;
 		}
-		if(ftpCH.CONNECT(upload.getServer(), upload.getPort(), upload.getUsername(), upload.getPassword())) {
-			response.setCode(ftpCH.getFTP().getReplyCode());
-			response.setMessage(ftpCH.getFTP().getReplyString());
+		
+		//Decode filecontents
+		byte[] decoded = Base64.getDecoder().decode(upload.getFilecontents());
+		String decodedString = new String(decoded);
+		
+		if(ftpsCH.CONNECT(upload.getServer(), upload.getPort(), upload.getUsername(), upload.getPassword())) {
+			response.setCode(ftpsCH.getFTPS().getReplyCode());
+			response.setMessage(ftpsCH.getFTPS().getReplyString());
 			try {
-				InputStream is = IOUtils.toInputStream(upload.getFilecontents(), "UTF-8");
-				ftpCH.getFTP().enterLocalPassiveMode();
-				ftpCH.getFTP().storeFile(upload.getFilename(), is);
-				response.setCode(ftpCH.getFTP().getReplyCode());
-				response.setMessage(ftpCH.getFTP().getReplyString());
+				InputStream is = IOUtils.toInputStream(decodedString, "UTF-8");
+				ftpsCH.getFTPS().enterLocalPassiveMode();
+				ftpsCH.getFTPS().storeFile(upload.getFilename(), is);
+				response.setCode(ftpsCH.getFTPS().getReplyCode());
+				response.setMessage(ftpsCH.getFTPS().getReplyString());
 				is.close();
 			}
 			catch(IOException ioe) {
@@ -42,10 +49,10 @@ public class Resources {
 			}
 		}
 		else {
-			response.setCode(ftpCH.getFTP().getReplyCode());
-			response.setMessage(ftpCH.getFTP().getReplyString());
+			response.setCode(ftpsCH.getFTPS().getReplyCode());
+			response.setMessage(ftpsCH.getFTPS().getReplyString());
 		}
-		ftpCH.DISCONNECT();
+		ftpsCH.DISCONNECT();
 		return response;
 	}
 	
@@ -54,12 +61,12 @@ public class Resources {
 	@Path("getFile/{filename}/{server}/{port}/{username}/{password}")
 	public FileResult getFile(@PathParam("filename") String filename, @PathParam("server") String server, @PathParam("port") int port, @PathParam("username") String username, @PathParam("password") String password)
 	{ 
-		FTPClientHandler ftpCH = new FTPClientHandler();
+		FTPSClientHandler ftpsCH = new FTPSClientHandler();
 		FileResult fr = new FileResult(filename, null);
 		try {
-			if(ftpCH.CONNECT(server, port, username, password)) {
-				ftpCH.getFTP().enterLocalPassiveMode();
-				InputStream is = ftpCH.getFTP().retrieveFileStream(filename);
+			if(ftpsCH.CONNECT(server, port, username, password)) {
+				ftpsCH.getFTPS().enterLocalPassiveMode();
+				InputStream is = ftpsCH.getFTPS().retrieveFileStream(filename);
 				if (is == null) {
 					System.err.println("File " + filename + " could not be found.");
 				}
@@ -72,7 +79,7 @@ public class Resources {
 		catch(IOException ioe) {
 			System.err.println("An error occurred while retrieving file " + filename);
 		}
-		ftpCH.DISCONNECT();
+		ftpsCH.DISCONNECT();
 		return fr;
 	}	
 }
