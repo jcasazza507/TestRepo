@@ -16,11 +16,11 @@ public class Resources {
 	@POST
 	@Path("putFile")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON) //Maybe not?? I just don't think an int primitive will work with JSON
-	public FTPResponse putFile(Upload upload)
+	@Consumes(MediaType.APPLICATION_JSON) 
+	public FTPResponse putFile()
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();
-		FTPResponse response = null;
+		FTPResponse response = new FTPResponse();
 		if (upload == null)
 		{
 			System.out.println("Passed improper arguments.");
