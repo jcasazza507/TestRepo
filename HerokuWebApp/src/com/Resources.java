@@ -21,7 +21,7 @@ public class Resources {
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();
 		FTPResponse response = null;
-		if (upload = null)
+		if (upload == null)
 		{
 			System.out.println("Passed improper arguments.");
 			return response;
