@@ -50,7 +50,7 @@ public class Resources {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("getFile/{filename}/{server}/{port}/{username}/{password}")
-	public FileResult getFile(@PathParam("{filename}") String filename, @PathParam("{server}") String server, @PathParam("{port}") int port, @PathParam("{username}") String username, @PathParam("{password}") String password)
+	public FileResult getFile(@PathParam("filename") String filename, @PathParam("server") String server, @PathParam("port") int port, @PathParam("username") String username, @PathParam("password") String password)
 	{ 
 		System.out.println("Server: " + server);
 		FTPClientHandler ftpCH = new FTPClientHandler();
