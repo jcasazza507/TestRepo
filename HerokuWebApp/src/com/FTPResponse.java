@@ -9,6 +9,11 @@ public class FTPResponse {
 		setCode(c);
 		setMessage(m);
 	}
+
+	public FTPResponse()
+	{
+
+	}
 	
 	public int getCode() {
 		return code;
