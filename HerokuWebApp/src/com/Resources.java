@@ -15,20 +15,20 @@ public class Resources {
 	
 	@POST
 	@Path("putFile")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON) //Maybe not?? I just don't think an int primitive will work with JSON
-	public int putFile(String filename, String filecontents, String server, int port, String username, String password)
+	public FTPResponse putFile(Upload upload)
 	{ 
 		FTPClientHandler ftpCH = new FTPClientHandler();
-		int replyCode;
-		if(ftpCH.CONNECT(server, port, username, password)) {
+		FTPResponse response;
+		if(ftpCH.CONNECT(upload.getServer(), upload.getPort(), upload.getUsername(), upload.getPassword())) {
 			//System.out.println("Connecting worked!!");
-			replyCode = ftpCH.getFTP().getReplyCode();
+			response.setCode() = ftpCH.getFTP().getReplyCode();
 			try {
-				InputStream is = IOUtils.toInputStream(filecontents, "UTF-8");
+				InputStream is = IOUtils.toInputStream(upload.getFilecontents(), "UTF-8");
 				ftpCH.getFTP().enterLocalPassiveMode();
 				ftpCH.getFTP().storeFile(filename, is);
-				replyCode = ftpCH.getFTP().getReplyCode();
+				response.setCode() = ftpCH.getFTP().getReplyCode();
 				is.close();
 			}
 			catch(IOException ioe) {
@@ -36,10 +36,10 @@ public class Resources {
 			}
 		}
 		else {
-			replyCode = ftpCH.getFTP().getReplyCode();
+			response.setCode() = ftpCH.getFTP().getReplyCode();
 		}
 		ftpCH.DISCONNECT();
-		return replyCode;
+		return response;
 	}
 	
 	@GET
