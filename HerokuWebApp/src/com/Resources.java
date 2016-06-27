@@ -27,6 +27,7 @@ public class Resources {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public FTPResponse putFile(Upload upload)
 	{ 
+		String decodedString = "";
 		FTPSClientHandler ftpsCH = new FTPSClientHandler();
 		FTPResponse response = new FTPResponse();
 		if (upload == null)
@@ -39,7 +40,7 @@ public class Resources {
 		try
 		{
 			byte[] decoded = Base64.getDecoder().decode(upload.getFilecontents());
-			String decodedString = new String(decoded);
+			decodedString = new String(decoded);
 		}
 		catch(IllegalArgumentException iae)
 		{
