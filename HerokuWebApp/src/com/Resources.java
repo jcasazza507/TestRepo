@@ -41,7 +41,7 @@ public class Resources {
 			byte[] decoded = Base64.getDecoder().decode(upload.getFilecontents());
 			String decodedString = new String(decoded);
 		}
-		catch(IlegalArgumentException iae)
+		catch(IllegalArgumentException iae)
 		{
 			System.err.println("File contents are not encoded properly.");
 			return response;
