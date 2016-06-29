@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import org.apache.commons.io.IOUtils;
 import javax.ws.rs.Path;
@@ -25,8 +26,12 @@ public class Resources {
 	@Path("putFile")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public FTPResponse putFile(Upload upload)
-	{ 
+	public FTPResponse putFile(@HeaderParam("authToken") String token, Upload upload)
+	{   
+		if (!token.equals(System.getenv("auth_token")))
+		{
+			return new FTPResponse(401, "Authentication error");
+		}
 		String decodedString = "";
 		FTPSClientHandler ftpsCH = new FTPSClientHandler();
 		FTPResponse response = new FTPResponse();
@@ -74,8 +79,13 @@ public class Resources {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("getFile/{filename}/{server}/{port}/{username}/{password}")
-	public FileResult getFile(@PathParam("filename") String filename, @PathParam("server") String server, @PathParam("port") int port, @PathParam("username") String username, @PathParam("password") String password)
+	public FileResult getFile(@HeaderParam("authToken") String token, @PathParam("filename") String filename, @PathParam("server") String server, @PathParam("port") int port, @PathParam("username") String username, @PathParam("password") String password)
 	{ 
+		if (!token.equals(System.getenv("auth_token")))
+		{
+			System.out.println("401 - An error occured during authentication");
+			return new FileResult(filename, null);
+		}
 		FTPSClientHandler ftpsCH = new FTPSClientHandler();
 		FileResult fr = new FileResult(filename, null);
 		try {
