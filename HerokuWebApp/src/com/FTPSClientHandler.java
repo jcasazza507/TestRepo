@@ -33,7 +33,7 @@ public class FTPSClientHandler {
 		}
 		catch (MalformedURLException e)
 		{
-			//do nothing
+			System.out.println("An error occurred while connecting to proxy");
 		}
 		
 		/**
