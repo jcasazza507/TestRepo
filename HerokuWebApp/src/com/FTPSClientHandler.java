@@ -29,9 +29,9 @@ public class FTPSClientHandler {
 			System.out.println("SOCKS Proxy Host: " + proxyHost);
 			System.out.println("SOCKS Proxy Port: " + proxyPort);
 			System.setProperty("socksProxyHost", proxyHost);
-			System.setProperty("socksProxyPort", "" + proxyPort)
+			System.setProperty("socksProxyPort", "" + proxyPort);
 		}
-		catch (MalFormedURLException e)
+		catch (MalformedURLException e)
 		{
 			//do nothing
 		}
