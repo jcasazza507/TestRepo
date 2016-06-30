@@ -1,8 +1,8 @@
 package com;
 import java.io.IOException;
 import java.net.URL;
-import java.net.Authenticator;
-import java.net.MalformedURLException;
+//import java.net.Authenticator;
+//import java.net.MalformedURLException;
 
 import org.apache.commons.net.ftp.*;
 import org.apache.jmeter.ProxyAuthenticator;
@@ -21,12 +21,13 @@ public class FTPSClientHandler {
 	
 	public FTPSClientHandler()
 	{
+		/**
 		try
 		{
 			URL proxyURL = new URL(System.getenv("QUOTAGUARDSTATIC_URL"));
 			
 			//Retrieve and set settings to connect through SOCKS proxy server
-			/**
+			
 			String proxyHost = proxyURL.getHost();
 			int proxyPort = proxyURL.getPort();
 			System.out.println("SOCKS Proxy Host: " + proxyHost);
@@ -38,12 +39,13 @@ public class FTPSClientHandler {
 			String user = userInfo.substring(0, userInfo.indexOf(':'));
 			String password = userInfo.substring(userInfo.indexOf(':') + 1);
 			Authenticator.setDefault(new ProxyAuthenticator(user, password));
-			*/
+			
 		}
 		catch (MalformedURLException e)
 		{
 			System.out.println("Error occurred while setting up proxy");
 		}
+		*/
 		
 		ftps = new FTPSClient(false);
 		
