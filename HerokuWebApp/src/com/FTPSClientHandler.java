@@ -1,6 +1,7 @@
 package com;
 import java.io.IOException;
 import java.net.URL;
+import java.net.MalformedURLException;
 
 import org.apache.commons.net.ftp.*;
 /**
