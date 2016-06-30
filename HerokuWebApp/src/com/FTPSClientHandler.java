@@ -5,7 +5,7 @@ import java.net.URL;
 //import java.net.MalformedURLException;
 
 import org.apache.commons.net.ftp.*;
-import org.apache.jmeter.ProxyAuthenticator;
+//import org.apache.jmeter.ProxyAuthenticator;
 /**
  * 
  * @author evan marian
