@@ -16,7 +16,7 @@ public class FTPSClientHandler {
 	
 	private FTPSClient ftps;
 	
-	public FTPSClientHandler() throws MalformedURLException;
+	public FTPSClientHandler() throws MalformedURLException
 	{
 		URL proxyURL = new URL(System.getenv("QUOTAGUARDSTATIC_URL"));
 		
