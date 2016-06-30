@@ -22,11 +22,11 @@ public class FTPSClientHandler {
 		
 		//Retrieve and set settings to connect through SOCKS proxy server
 		String proxyHost = proxyURL.getHost();
-		String proxyPort = proxyURL.getPort();
+		int proxyPort = proxyURL.getPort();
 		System.out.println("SOCKS Proxy Host: " + proxyHost);
 		System.out.println("SOCKS Proxy Port: " + proxyPort);
 		System.setProperty("socksProxyHost", proxyHost);
-		System.setProperty("socksProxyPort", proxyPort);
+		System.setProperty("socksProxyPort", "" + proxyPort);
 		
 		/**
 		 * Not quite sure what below stuff does. Obviously some type of authentication.
