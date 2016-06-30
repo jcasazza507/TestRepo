@@ -66,11 +66,6 @@
   		<version>3.0</version>
   	</dependency>
   	<dependency>
-  		<groupId>javax.ws.rs</groupId>
-  		<artifactId>javax.ws.rs-api</artifactId>
-  		<version>2.0.1</version>
-  	</dependency>
-  	<dependency>
   		<groupId>com.sun.jersey</groupId>
   		<artifactId>jersey-grizzly2</artifactId>
   		<version>1.19.1</version>
