@@ -17,17 +17,24 @@ public class FTPSClientHandler {
 	
 	private FTPSClient ftps;
 	
-	public FTPSClientHandler() throws MalformedURLException
+	public FTPSClientHandler()
 	{
-		URL proxyURL = new URL(System.getenv("QUOTAGUARDSTATIC_URL"));
-		
-		//Retrieve and set settings to connect through SOCKS proxy server
-		String proxyHost = proxyURL.getHost();
-		int proxyPort = proxyURL.getPort();
-		System.out.println("SOCKS Proxy Host: " + proxyHost);
-		System.out.println("SOCKS Proxy Port: " + proxyPort);
-		System.setProperty("socksProxyHost", proxyHost);
-		System.setProperty("socksProxyPort", "" + proxyPort);
+		try
+		{
+			URL proxyURL = new URL(System.getenv("QUOTAGUARDSTATIC_URL"));
+			
+			//Retrieve and set settings to connect through SOCKS proxy server
+			String proxyHost = proxyURL.getHost();
+			int proxyPort = proxyURL.getPort();
+			System.out.println("SOCKS Proxy Host: " + proxyHost);
+			System.out.println("SOCKS Proxy Port: " + proxyPort);
+			System.setProperty("socksProxyHost", proxyHost);
+			System.setProperty("socksProxyPort", "" + proxyPort)
+		}
+		catch (MalFormedURLException e)
+		{
+			//do nothing
+		}
 		
 		/**
 		 * Not quite sure what below stuff does. Obviously some type of authentication.
