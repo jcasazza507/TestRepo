@@ -26,6 +26,7 @@ public class FTPSClientHandler {
 			URL proxyURL = new URL(System.getenv("QUOTAGUARDSTATIC_URL"));
 			
 			//Retrieve and set settings to connect through SOCKS proxy server
+			/**
 			String proxyHost = proxyURL.getHost();
 			int proxyPort = proxyURL.getPort();
 			System.out.println("SOCKS Proxy Host: " + proxyHost);
@@ -37,6 +38,7 @@ public class FTPSClientHandler {
 			String user = userInfo.substring(0, userInfo.indexOf(':'));
 			String password = userInfo.substring(userInfo.indexOf(':') + 1);
 			Authenticator.setDefault(new ProxyAuthenticator(user, password));
+			*/
 		}
 		catch (MalformedURLException e)
 		{
