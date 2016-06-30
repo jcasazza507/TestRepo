@@ -48,6 +48,8 @@ public class FTPSClientHandler {
 		ftps = new FTPSClient(false);
 		
 		ftps.setRemoteVerificationEnabled(false); //allows a proxy server to communicate in it's stead
+		System.out.println("Made it through!");
+
 	}
 	
 	public FTPSClient getFTPS() {
