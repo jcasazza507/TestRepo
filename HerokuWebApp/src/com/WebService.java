@@ -21,8 +21,8 @@ public class WebService
 		System.out.println("PORT: " + port);
 		final URI baseUri = UriBuilder.fromUri("http://0.0.0.0/").port(port).build();
 		ResourceConfig rc = ResourceConfig.builder().packages(WebService.class.getPackage().getName()).build();
-		rc.getProperties().put("com.sun.jersey.spi.container.ContainerRequestFilters", WebService.class.getPackage().getName() + ".AuthFilter");
-        final Application application = Application.builder(rc).build();
+		//rc.getProperties().put("com.sun.jersey.spi.container.ContainerRequestFilters", WebService.class.getPackage().getName() + ".AuthFilter");
+        	final Application application = Application.builder(rc).build();
         	application.addModules(new JsonJacksonModule());
 		final HttpServer httpServer = GrizzlyHttpServerFactory.createHttpServer(baseUri, application);
 		Runtime.getRuntime().addShutdownHook(new Thread() {
