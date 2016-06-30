@@ -1,5 +1,7 @@
 package com;
 import java.io.IOException;
+import java.net.URL;
+
 import org.apache.commons.net.ftp.*;
 /**
  * 
@@ -14,8 +16,30 @@ public class FTPSClientHandler {
 	
 	private FTPSClient ftps;
 	
-	public FTPSClientHandler() {
+	public FTPSClientHandler() 
+	{
+		URL proxyURL = new URL(System.getenv("QUOTAGUARDSTATIC_URL"));
+		
+		//Retrieve and set settings to connect through SOCKS proxy server
+		String proxyHost = proxyURL.getHost();
+		String proxyPort = proxyURL.getPort();
+		System.out.println("SOCKS Proxy Host: " + proxyHost);
+		System.out.println("SOCKS Proxy Port: " + proxyPort);
+		System.setProperty("socksProxyHost", proxyHost);
+		System.setProperty("socksProxyPort", proxyPort);
+		
+		/**
+		 * Not quite sure what below stuff does. Obviously some type of authentication.
+		 * Is it necessary?
+		String userInfo = proxyUrl.getUserInfo();
+		String user = userInfo.substring(0, userInfo.indexOf(':'));
+		String password = userInfo.substring(userInfo.indexOf(':') + 1);
+		Authenticator.setDefault(new ProxyAuthenticator(user, password));
+		*/
+		
 		ftps = new FTPSClient(false);
+		
+		ftps.setRemoteVerificationEnabled(false); //allows a proxy server to communicate in it's stead
 	}
 	
 	public FTPSClient getFTPS() {
