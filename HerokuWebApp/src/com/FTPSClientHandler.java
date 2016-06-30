@@ -1,9 +1,11 @@
 package com;
 import java.io.IOException;
 import java.net.URL;
+import java.net.Authenticator;
 import java.net.MalformedURLException;
 
 import org.apache.commons.net.ftp.*;
+import org.apache.jmeter.ProxyAuthenticator;
 /**
  * 
  * @author evan marian
@@ -30,26 +32,21 @@ public class FTPSClientHandler {
 			System.out.println("SOCKS Proxy Port: " + proxyPort);
 			System.setProperty("socksProxyHost", proxyHost);
 			System.setProperty("socksProxyPort", "" + proxyPort);
+			
+			String userInfo = proxyURL.getUserInfo();
+			String user = userInfo.substring(0, userInfo.indexOf(':'));
+			String password = userInfo.substring(userInfo.indexOf(':') + 1);
+			Authenticator.setDefault(new ProxyAuthenticator(user, password));
 		}
 		catch (MalformedURLException e)
 		{
-			System.out.println("An error occurred while connecting to proxy");
+			System.out.println("Error occurred while setting up proxy");
 		}
-		
-		/**
-		 * Not quite sure what below stuff does. Obviously some type of authentication.
-		 * Is it necessary?
-		String userInfo = proxyUrl.getUserInfo();
-		String user = userInfo.substring(0, userInfo.indexOf(':'));
-		String password = userInfo.substring(userInfo.indexOf(':') + 1);
-		Authenticator.setDefault(new ProxyAuthenticator(user, password));
-		*/
 		
 		ftps = new FTPSClient(false);
 		
 		ftps.setRemoteVerificationEnabled(false); //allows a proxy server to communicate in it's stead
-		System.out.println("Made it through!");
-
+		System.out.println("Made it through ");
 	}
 	
 	public FTPSClient getFTPS() {
